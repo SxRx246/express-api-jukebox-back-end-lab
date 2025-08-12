@@ -11,7 +11,7 @@ const app = express()
 app.use(express.json())
 
 app.use(morgan('dev'))
-app.use("/pets" , trackRoutes)
+app.use("/tracks" , trackRoutes)
 
 mongoose.connect(process.env.DB_URI)
 mongoose.connection.on('connected' , ()=>{
