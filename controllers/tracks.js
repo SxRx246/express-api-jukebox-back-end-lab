@@ -13,7 +13,10 @@ async function createTrack(req, res) {
 async function trackIndex(req, res) {
     try {
         const allTracks = await Track.find()
-        res.status(200).json(allTracks)
+        if (allTracks.length)
+            res.status(200).json(allTracks)
+        else
+            res.sendStatus(204)
     }
     catch (error) {
         console.log(error)
@@ -23,7 +26,10 @@ async function trackIndex(req, res) {
 async function showTrack(req, res) {
     try {
         const track = await Track.findById(req.params.id)
-        res.status(200).json(track)
+        if (track)
+            res.status(200).json(track)
+        else
+            res.sendStatus(404)
     }
     catch (error) {
         console.log(error)
@@ -32,8 +38,12 @@ async function showTrack(req, res) {
 }
 async function updateTrack(req, res) {
     try {
-        const track = await Track.findByIdAndUpdate(req.params.id , req.body, {new : true})
-        res.status(200).json(track)
+        const track = await Track.findByIdAndUpdate(req.params.id, req.body, { new: true })
+        
+        if (track)
+            res.status(200).json(track)
+        else
+            res.sendStatus(404)
     }
     catch (error) {
         console.log(error)
@@ -43,7 +53,11 @@ async function updateTrack(req, res) {
 async function deleteTrack(req, res) {
     try {
         const track = await Track.findByIdAndDelete(req.params.id)
-        res.status(200).json(track)
+        
+        if (track)
+            res.status(200).json(track)
+        else
+            res.sendStatus(404)
     }
     catch (error) {
         console.log(error)
