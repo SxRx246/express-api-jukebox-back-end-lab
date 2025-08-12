@@ -11,7 +11,19 @@ async function createTrack(req, res) {
         res.status(500).json({ error: error.message })
     }
 }
+async function trackIndex(req, res) {
+    // console.log("You are in the create track controller")
+    try {
+        const allTracks = await Track.find()
+        res.status(200).json(allTracks)
+    }
+    catch (error) {
+        console.log(error)
+        res.status(500).json({ error: error.message })
+    }
+}
 
 module.exports = {
-    createTrack
+    createTrack,
+    trackIndex
 }
