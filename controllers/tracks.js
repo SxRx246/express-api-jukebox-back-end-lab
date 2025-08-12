@@ -32,7 +32,17 @@ async function showTrack(req, res) {
 }
 async function updateTrack(req, res) {
     try {
-        const track = await Track.findByIdAndUpdate(req.params.id , req.body)
+        const track = await Track.findByIdAndUpdate(req.params.id , req.body, {new : true})
+        res.status(200).json(track)
+    }
+    catch (error) {
+        console.log(error)
+        res.status(500).json({ error: error.message })
+    }
+}
+async function deleteTrack(req, res) {
+    try {
+        const track = await Track.findByIdAndDelete(req.params.id)
         res.status(200).json(track)
     }
     catch (error) {
@@ -45,5 +55,6 @@ module.exports = {
     createTrack,
     trackIndex,
     showTrack,
-    updateTrack
+    updateTrack,
+    deleteTrack
 }
