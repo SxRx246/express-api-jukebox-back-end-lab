@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const dotenv = require('dotenv')
 const morgan = require('morgan')
 
-const musicRoutes = require('./routes/musicRoutes') 
+const trackRoutes = require('./routes/trackRoutes') 
 
 dotenv.config()
 const app = express()
@@ -11,7 +11,7 @@ const app = express()
 app.use(express.json())
 
 app.use(morgan('dev'))
-app.use("/pets" , musicRoutes)
+app.use("/pets" , trackRoutes)
 
 mongoose.connect(process.env.DB_URI)
 mongoose.connection.on('connected' , ()=>{
